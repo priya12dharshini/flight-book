@@ -7,7 +7,7 @@ export default function () {
       <form className='hForm'>
       <h2 className='hTitle'>Home</h2>
       <label>Flight Number</label>
-      <input className='hinput' type='text' placeholder='enter number...'  /><br/>
+      <input className='hinput' type='text' placeholder='enter number...'  />
       <label>Source</label>
       <select className='hinput'>
       <option>Bangalore</option>
@@ -15,15 +15,15 @@ export default function () {
       <option>New Delhi</option>
       <option>Pune</option>
       <option>Chennai</option>
-      </select><br/>
+      </select>
       <label>destination</label>
-      <select className='hinput'><br/>
+      <select className='hinput'>
       <option>Bangalore</option>
       <option>Mumbai</option>
       <option>New Delhi</option>
       <option>Pune</option>
       <option>Chennai</option>
-      </select><br/>
+      </select>
       <label>Date</label>
       <input className='hinput' type='Date'/>
       <button className='hbutton' type="submit">Submit</button>

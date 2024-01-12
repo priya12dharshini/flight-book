@@ -37,7 +37,7 @@
 }
 
 .loginForm > label {
-    margin: 20px;
+    margin: 10px;
     font-size: 20px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
@@ -48,6 +48,12 @@
     font-size: 15px;
     border-radius: 10px;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.rad {
+    display:flex;
+    flex-direction: row;
+    margin-left: 5px;
 }
 
 .lbutton {

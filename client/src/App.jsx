@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from '../src/components/Navbar';
-import './App.css'
+//import './App.css'
 import Home from '../src/pages/Home';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -9,7 +9,6 @@ import AdminDashboard from './pages/AdminDashboard';
 import axios from 'axios';
 import { Toaster } from 'react-hot-toast'
 import { UserContextProvider } from '../context/userContext';
-import Booking from './pages/Booking';
 import AddFlight from './pages/AddFlight';
 import RemoveFlight from './pages/RemoveFlight';
 

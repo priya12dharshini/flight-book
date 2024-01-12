@@ -30,6 +30,12 @@ const registerUser = async (req, res) => {
             })
         }
 
+        if (!['Admin', 'User'].includes(userType)) {
+            return res.json({
+                error: 'Invalid userType. Must be either "Admin" or "User".'
+            });
+        }
+
         const hashedPassword = await hashPassword(password)
 
         const user = await User.create({
@@ -53,7 +59,8 @@ const loginUser = async (req, res) => {
             })
         }
 
-        if (user.userType !== userType) {
+
+        if (user.userType !== 'Admin' && user.userType !== 'User') {
             return res.json({
                 error: 'Invalid user type'
             });
@@ -90,54 +97,47 @@ const getProfile = (req, res) => {
 
 const addFlight = async (req, res) => {
     try {
-        const {flightNumber, source, destination, date} = req.body;
-        if (req.userType !== 'admin') {
-            return res.json({
-              error: 'Unauthorized: Only admin users can add flights.',
-            });
-          }
-        if(!flightNumber) {
+        const { flightNumber, source, destination, date } = req.body;
+
+        if (!flightNumber) {
             return res.json({
                 error: 'Flight number is required'
-            })
-        };
+            });
+        }
 
-        if(!source) {
+        if (!source) {
             return res.json({
-                error: 'source is required'
-            })
-        };
+                error: 'Source is required'
+            });
+        }
 
-        if(!destination) {
+        if (!destination) {
             return res.json({
-                error: 'destination is required'
-            })
-        };
+                error: 'Destination is required'
+            });
+        }
 
         const flight = await Flight.create({
             flightNumber, source, destination, date
         });
 
-        return res.json(flight)
+        return res.json(flight);
     } catch (error) {
-        console.log(error)
+        console.log(error);
+        return res.json('Failed to add flight');
     }
 };
 
-const removeFlight = async (req, res) => {
+
+  const removeFlight = async (req, res) => {
     try {
+      console.log(req.params);
       const { flightNumber } = req.params;
   
-      if (req.userType !== 'admin') {
-        return res.json({
-          error: 'Unauthorized: Only admin users can remove flights.',
-        });
-      }
-  
-      const flight = await Flight.findByIdAndDelete(flightNumber);
+      const flight = await Flight.findOneAndDelete({ flightNumber });
   
       if (!flight) {
-        return res.json({
+        return res.status(404).json({
           error: 'Flight not found',
         });
       }
@@ -147,7 +147,20 @@ const removeFlight = async (req, res) => {
       });
     } catch (error) {
       console.log(error);
-      return res.json('Failed to remove flight');
+      return res.status(500).json({ error: 'Failed to remove flight', details: error.message });
+    }
+  };
+  
+  
+  
+
+  const getFlights = async (req, res) => {
+    try {
+      const flights = await Flight.find(); 
+      res.json(flights);
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error: 'Internal Server Error' });
     }
   };
   
@@ -159,4 +172,5 @@ module.exports = {
     loginUser, getProfile, 
     addFlight,
     removeFlight,
+    getFlights,
 };

@@ -15,14 +15,11 @@ const RemoveFlight = () => {
     e.preventDefault();
     const { flightNumber, source, destination, date } = data;
     try {
-      const response = await axios.delete('/remove-flight', {
-        data: {
-          flightNumber,
-          source,
-          destination,
-          date,
-        },
+      const response = await axios.delete(`/remove-flight/${flightNumber}`, {
+        data: { flightNumber, source, destination, date },
       });
+      
+      console.log(response.data);
       if (response.status === 200) {
         toast.success('Flight removed successfully');
       } else {
@@ -32,6 +29,8 @@ const RemoveFlight = () => {
       console.log(error);
     }
   };
+  
+  
 
   return (
     <div className='rem'>

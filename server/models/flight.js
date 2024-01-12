@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const {Schema} = mongoose
 
 const flightSchema = new Schema({
-    flightNumber: String,
+    flightNumber: Number,
     source: String,
     destination: String,
     date: Date,

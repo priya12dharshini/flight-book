@@ -24,7 +24,13 @@ const addFlight = async (e) => {
       if (data.error) {
           toast.error(data.error)
       } else {
-          setData({})
+          setData({
+            flightNumber: '',
+            source: '',
+            destination: '',
+            date: '',
+          });
+        
           toast.success('Added Successful. Welcome!')
           navigate('/admin')
       }
