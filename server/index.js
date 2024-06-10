@@ -6,7 +6,7 @@ const app = express();
 const cookieParser = require('cookie-parser')
 
 
-mongoose.connect("mongodb+srv://spd85250:priya@cluster0.4q1qgrs.mongodb.net/?retryWrites=true&w=majority")
+mongoose.connect("your_MongoDB_URL")
   .then(() => console.log('Database Connected'))
   .catch((err) => console.log('Database not connected', err));
 
